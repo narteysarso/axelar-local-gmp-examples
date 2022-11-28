@@ -1,5 +1,10 @@
 # Axelar cross-chain dApp examples
 
+# Contracts Address
+
+Deployed DistributionExecutable for Avalanche at 0x314b2D48d6Dd5953793b546ebD6834dd9f0a9DD6.
+Deployed DistributionExecutable for Polygon at 0x5A29ef35db99d48f9E05f74CC0837B7D1Faa5406.
+
 ## Introduction
 
 This repo provides the code for several example dApps in the [Axelar Local Development Environment](https://github.com/axelarnetwork/axelar-local-dev). Examples contain both JavaScript and Solidity smart contract code.

@@ -27,7 +27,8 @@ async function test(chains, wallet, options) {
     const source = chains.find((chain) => chain.name === (args[0] || 'Avalanche'));
     const destination = chains.find((chain) => chain.name === (args[1] || 'Fantom'));
     const amount = Math.floor(parseFloat(args[2])) * 1e6 || 10e6;
-    const accounts = args.slice(3);
+    const message = args[3] || "default message";
+    const accounts = args.slice(4);
 
     if (accounts.length === 0) accounts.push(wallet.address);
 
@@ -46,8 +47,18 @@ async function test(chains, wallet, options) {
         }
     }
 
+    
+    async function logMessage(paymentCounter){
+        
+        console.log(`Message for payment is: ${await destination.contract.paymentMessages(paymentCounter)}`);
+    }
+
+    const paymentCounter = await destination.contract.paymentCounter();
+    console.log(paymentCounter);
+
     console.log('--- Initially ---');
     await logAccountBalances();
+    await logMessage(paymentCounter);
 
     const gasLimit = 3e6;
     const gasPrice = await getGasPrice(source, destination, AddressZero);
@@ -57,17 +68,25 @@ async function test(chains, wallet, options) {
     const approveTx = await source.usdc.approve(source.contract.address, amount);
     await approveTx.wait();
 
-    const sendTx = await source.contract.sendToMany(destination.name, destination.distributionExecutable, accounts, 'aUSDC', amount, {
+    console.log({
+       name: destination.name, address: destination.distributionExecutable, accounts, message, token: 'aUSDC', amount
+    })
+    const sendTx = await source.contract.sendToMany(destination.name, destination.distributionExecutable, accounts, message, 'aUSDC', amount, {
         value: BigInt(Math.floor(gasLimit * gasPrice)),
     });
     await sendTx.wait();
 
-    while (BigInt(await destination.usdc.balanceOf(accounts[0])) === balance) {
-        await sleep(2000);
-    }
+    // while (BigInt(await destination.usdc.balanceOf(accounts[0])) === balance || (await destination.contract.message) !== message) {
+    //     await sleep(2000);
+    // }
+
+    // while ((await destination.contract.value()) !== message) {
+        await sleep(5000);
+    // }
 
     console.log('--- After ---');
     await logAccountBalances();
+    await logMessage(paymentCounter);
 }
 
 module.exports = {
