@@ -1,6 +1,6 @@
 'use strict';
 require("dotenv").config();
-const { testnetInfo } = require('@axelar-network/axelar-local-dev');
+const testnetInfo  = require('../info/testnet.json');
 const { ethers, Wallet } = require('ethers');
 
 const chains =  testnetInfo;

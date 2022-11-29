@@ -1,15 +1,70 @@
-# Axelar cross-chain dApp examples
+# Axelar cross-chain dApp
+In this work [/examples/call-contract-with-tokens](https://github.com/narteysarso/axelar-local-gmp-examples/blob/main/examples/call-contract-with-token)/`DistributionExecutable.sol` is modified to allow sending tokens with a message. 
+
+To achieve this:
+- A new `paymentMessage` parameter is added to the `sendToMany` function on the contract on line 29.
+    ```
+        function sendToMany(
+            string memory destinationChain,
+            string memory destinationAddress,
+            address[] calldata destinationAddresses,
+            string calldata paymentMessage, // message parameter
+            string memory symbol,
+            uint256 amount
+        ) external payable
+    ```
+
+- The payload of `callContractWithToken` of `IAxelarGateway` instance `gateway` is abi encoded with both `destinationAddress` and `paymentMessage` on line 38
+ ```
+    // Encode both `paymentMessages` and `destinationAddresses` as part of payload
+    bytes memory payload = abi.encode(
+        abi.encode(destinationAddresses), 
+        abi.encode(paymentMessage)
+    );
+
+ ```
+ - line 55
+ ```
+    gateway.callContractWithToken(destinationChain, destinationAddress, payload, symbol, amount);
+
+ ```
+
+ - The payload is decoded in `_executeWithToken` in two steps. First to get the bytes for destinationAddress and paymentMessage, then to decoded again to get thier respective values in their dataTypes. onl
+
+ ```
+        // Decode `paymentMessages` and `destinationAddresses` from payload
+        (bytes memory _addresses, bytes memory _message)= abi.decode(payload, (bytes, bytes ));
+
+        // Abi decode recipient addresses
+        address[] memory recipients = abi.decode(_addresses, (address[]));
+        
+        // Abi decode message
+        string memory message = abi.decode(_message, (string));
+ ```
+
+- Next message is set to the state variable `paymentMessages` mapping the transaction number `paymentCounter` to the message
+```
+ // Store message in `paymentMessages mapping`
+    paymentMessages[paymentCounter.current()] = message;
+
+    paymentCounter.increment();
+```
+
+- And tokens are transfered to recipients as usual
+```
+    for (uint256 i = 0; i < recipients.length; i++) {
+        IERC20(tokenAddress).transfer(recipients[i], sentAmount);
+
+    }
+```
 
 # Contracts Address
+Contracts are deployed to Avalanche and Polygon
 
-Deployed DistributionExecutable for Avalanche at 0x314b2D48d6Dd5953793b546ebD6834dd9f0a9DD6.
-Deployed DistributionExecutable for Polygon at 0x5A29ef35db99d48f9E05f74CC0837B7D1Faa5406.
+- Deployed DistributionExecutable for Avalanche at 0x314b2D48d6Dd5953793b546ebD6834dd9f0a9DD6.
 
-## Introduction
+- Deployed DistributionExecutable for Polygon at [0x5A29ef35db99d48f9E05f74CC0837B7D1Faa5406]().
 
-This repo provides the code for several example dApps in the [Axelar Local Development Environment](https://github.com/axelarnetwork/axelar-local-dev). Examples contain both JavaScript and Solidity smart contract code.
-
-**Note:** Some example folders in this repo are not documented below.
 
 ## One-time setup
 

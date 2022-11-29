@@ -10,7 +10,7 @@
     "executableSample": "0x9372350Abb3B5c10DB1BB858e0bCf91eFa74d946",
     "constAddressDeployer": "0xd5bf7311032fe5dde956de6f2916f135a140e7dd",
     "crossChainToken": "0xb5ADB662B1DebDCc96c4d7c406aDF20F310aEe0B",
-    "distributionExecutable": "0x314b2D48d6Dd5953793b546ebD6834dd9f0a9DD6"
+    "distributionExecutable": "0x9B6e6F904F45D8b71e82d4F296677810A6Ac63AA"
   },
   {
     "name": "Polygon",
@@ -23,6 +23,6 @@
     "executableSample": "0x49Bd72FD6f59B57418DA42521628EfFD7df9DB1B",
     "constAddressDeployer": "0xd5bf7311032fe5dde956de6f2916f135a140e7dd",
     "crossChainToken": "0xb5ADB662B1DebDCc96c4d7c406aDF20F310aEe0B",
-    "distributionExecutable": "0x5A29ef35db99d48f9E05f74CC0837B7D1Faa5406"
+    "distributionExecutable": "0x0660bF3b6bD1f5167E8F54E3a781577BfE5f6660"
   }
 ]

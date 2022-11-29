@@ -65,10 +65,12 @@ contract DistributionExecutable is AxelarExecutable {
         // Decode `paymentMessages` and `destinationAddresses` from payload
         (bytes memory _addresses, bytes memory _message)= abi.decode(payload, (bytes, bytes ));
 
+        // Abi decode recipient addresses
         address[] memory recipients = abi.decode(_addresses, (address[]));
 
         address tokenAddress = gateway.tokenAddresses(tokenSymbol);
         
+        // Abi decode recipient addresses
         string memory message = abi.decode(_message, (string));
 
         uint256 sentAmount = amount / recipients.length;
