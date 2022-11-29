@@ -65,7 +65,7 @@ Contracts are deployed to Avalanche and Polygon
 
 - Deployed DistributionExecutable for Polygon at [0x0660bF3b6bD1f5167E8F54E3a781577BfE5f6660](https://mumbai.polygonscan.com/address/0x0660bF3b6bD1f5167E8F54E3a781577BfE5f6660).
 
-- Example transaction: [0x8682579fd98c5feb8cd90d38c5c50f8a561d02c929f7d33fe824fda327db06b4](https://testnet.axelarscan.io/gmp/0x8682579fd98c5feb8cd90d38c5c50f8a561d02c929f7d33fe824fda327db06b4)
+- Axelar link: [0x8682579fd98c5feb8cd90d38c5c50f8a561d02c929f7d33fe824fda327db06b4](https://testnet.axelarscan.io/gmp/0x8682579fd98c5feb8cd90d38c5c50f8a561d02c929f7d33fe824fda327db06b4)
 
 
 ## One-time setup
