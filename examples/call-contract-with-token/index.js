@@ -26,8 +26,8 @@ async function test(chains, wallet, options) {
     const getGasPrice = options.getGasPrice;
     const source = chains.find((chain) => chain.name === (args[0] || 'Avalanche'));
     const destination = chains.find((chain) => chain.name === (args[1] || 'Fantom'));
-    const amount = (parseFloat(args[2]) * 1e18).toString();
-    const message = args[3] || "default message";
+    const message = args[2] || "default message";
+    const amount = (parseFloat(args[3]) * 1e18).toString();
     const accounts = args.slice(4);
 
     if (accounts.length === 0) accounts.push(wallet.address);
@@ -39,6 +39,8 @@ async function test(chains, wallet, options) {
         chain.gateway = new Contract(chain.gateway, Gateway.abi, chain.wallet);
         const usdcAddress = await chain.gateway.tokenAddresses('WMATIC');
         chain.usdc = new Contract(usdcAddress, IERC20.abi, chain.wallet);
+
+        console.log(chain.name, chain.distributionExecutable)
 
     }
 

@@ -61,9 +61,11 @@ To achieve this:
 # Contracts Address
 Contracts are deployed to Avalanche and Polygon
 
-- Deployed DistributionExecutable for Avalanche at 0x314b2D48d6Dd5953793b546ebD6834dd9f0a9DD6.
+- Deployed DistributionExecutable for Avalanche at [0x9B6e6F904F45D8b71e82d4F296677810A6Ac63AA](https://testnet.snowtrace.io/address/0x9B6e6F904F45D8b71e82d4F296677810A6Ac63AA).
 
-- Deployed DistributionExecutable for Polygon at [0x5A29ef35db99d48f9E05f74CC0837B7D1Faa5406]().
+- Deployed DistributionExecutable for Polygon at [0x0660bF3b6bD1f5167E8F54E3a781577BfE5f6660](https://mumbai.polygonscan.com/address/0x0660bF3b6bD1f5167E8F54E3a781577BfE5f6660).
+
+- Example transaction: [0x8682579fd98c5feb8cd90d38c5c50f8a561d02c929f7d33fe824fda327db06b4](https://testnet.axelarscan.io/gmp/0x8682579fd98c5feb8cd90d38c5c50f8a561d02c929f7d33fe824fda327db06b4)
 
 
 ## One-time setup
@@ -169,14 +171,14 @@ node scripts/deploy examples/call-contract-with-token [local|testnet]
 Run the test:
 
 ```bash
-node scripts/test examples/call-contract-with-token [local|testnet] ${"source-chain"} ${"destination-chain"} ${amount} ${account} ${account2} ...
+node scripts/test examples/call-contract-with-token [local|testnet] ${"source-chain"} ${"destination-chain"} ${"Payment Message"} ${amount} ${account} ${account2} ...
 ```
 
 #### Example
 
 ```bash
 node scripts/deploy examples/call-contract-with-token local
-node scripts/test examples/call-contract-with-token local "Moonbeam" "Ethereum" 100 0xBa86A5719722B02a5D5e388999C25f3333c7A9fb
+node scripts/test examples/call-contract-with-token local "Avalance" "Polygon" "Payment message" 100 0xBa86A5719722B02a5D5e388999C25f3333c7A9fb
 ```
 
 Output:
